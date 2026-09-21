@@ -97,18 +97,24 @@ def pad_to(points, n):
 glyph_pts = glyph_dot_positions("</>", BOX)
 glyph_pts = pad_to(glyph_pts, len(dots))
 
+# GitHub strips SMIL (<animate>) from SVGs it renders, so the morph is driven by
+# CSS @keyframes instead (translate transform, one keyframe rule per dot) — CSS
+# animations survive GitHub's sanitizer, SMIL does not.
 DUR = 8  # seconds per full loop
-KT = "0;0.4;0.5;0.9;1"
 
 dot_svg_parts = []
-for (cx, cy, r, op), (tx, ty) in zip(dots, glyph_pts):
+keyframes_parts = []
+for i, ((cx, cy, r, op), (tx, ty)) in enumerate(zip(dots, glyph_pts)):
+    dx, dy = tx - cx, ty - cy
     dot_svg_parts.append(
-        f'<circle r="{r:.2f}" fill="{ACCENT}" fill-opacity="{op:.2f}">'
-        f'<animate attributeName="cx" values="{cx:.2f};{cx:.2f};{tx:.2f};{tx:.2f};{cx:.2f}" keyTimes="{KT}" dur="{DUR}s" repeatCount="indefinite"/>'
-        f'<animate attributeName="cy" values="{cy:.2f};{cy:.2f};{ty:.2f};{ty:.2f};{cy:.2f}" keyTimes="{KT}" dur="{DUR}s" repeatCount="indefinite"/>'
-        f'</circle>'
+        f'<circle class="d{i}" cx="{cx:.2f}" cy="{cy:.2f}" r="{r:.2f}" fill="{ACCENT}" fill-opacity="{op:.2f}"/>'
+    )
+    keyframes_parts.append(
+        f'.d{i}{{animation:m{i} {DUR}s ease-in-out infinite}}'
+        f'@keyframes m{i}{{0%,40%{{transform:translate(0,0)}}50%,90%{{transform:translate({dx:.2f}px,{dy:.2f}px)}}100%{{transform:translate(0,0)}}}}'
     )
 dot_svg = "\n    ".join(dot_svg_parts)
+dot_keyframes = "".join(keyframes_parts)
 
 # corner brackets for the visual map box
 bl = 14  # bracket arm length
@@ -160,6 +166,7 @@ svg = f'''<svg width="{W}" height="{H}" viewBox="0 0 {W} {H}" xmlns="http://www.
       <stop offset="100%" stop-color="{BG_BOTTOM}"/>
     </linearGradient>
   </defs>
+  <style>{dot_keyframes}</style>
 
   <rect width="{W}" height="{H}" rx="14" fill="url(#bg)"/>
   <rect x="0.75" y="0.75" width="{W-1.5}" height="{H-1.5}" rx="13.5" fill="none" stroke="{BORDER}" stroke-opacity="0.35" stroke-width="1.5"/>
