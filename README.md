@@ -5,7 +5,7 @@
 <br>
 
 <a href="https://github.com/aidasunis">
-  <img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=600&size=20&duration=2600&pause=900&color=A78BFA&center=true&vCenter=true&width=600&lines=Aida+-+Ingenier%C3%ADa+Mecatr%C3%B3nica;Construyendo+apps+y+p%C3%A1ginas+web;Buscando+la+pr%C3%B3xima+gran+app+de+productividad" alt="typing banner">
+  <img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=600&size=20&duration=2600&pause=900&color=A78BFA&center=true&vCenter=true&width=600&lines=Aida+-+Mechatronics+Engineering;Building+apps+and+web+pages;Looking+for+the+next+great+productivity+app" alt="typing banner">
 </a>
 
 <br>
@@ -16,14 +16,14 @@
 
 ---
 
-## Sobre mí
+## About me
 
-Estudio Ingeniería Mecatrónica, pero paso buena parte de mi tiempo libre construyendo páginas
-web y aplicaciones — algo que aprendí por mi cuenta y que disfruto más de lo que debería admitir.
+I study Mechatronics Engineering, but I spend a good chunk of my free time building web pages
+and apps — something I picked up on my own and enjoy more than I probably should admit.
 
-Ahora mismo estoy trabajando en un par de apps, con la idea de algún día subir alguna a la Play
-Store. También soy fan de probar apps nuevas — sobre todo si son de productividad, siempre
-buscando la que finalmente me organice la vida.
+Right now I'm working on a couple of apps, with the idea of eventually shipping one to the Play
+Store. I'm also a big fan of trying out new apps — especially productivity ones, always looking
+for the one that finally gets my life organized.
 
 <br>
 
@@ -38,5 +38,5 @@ buscando la que finalmente me organice la vida.
 ---
 
 <div align="center">
-<sub>construido a mano, sin plantillas</sub>
+<sub>built by hand, no templates</sub>
 </div>
