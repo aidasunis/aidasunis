@@ -20,17 +20,17 @@
 
 ---
 
-## About me
+## About me :)
 
 I study Mechatronics Engineering, but I spend a good chunk of my free time building web pages
-and apps — something I picked up on my own and enjoy more than I probably should admit.
+and apps, something I picked up on my own and enjoy more than I probably should admit.
 
 Outside of code, I'm usually somewhere with a camera — open fields, the beach, anywhere near the
 sea. I'm a little obsessed with wildlife and marine life, and I like drawing just as much as I
 like shipping apps.
 
 Right now I'm working on a couple of apps, with the idea of eventually shipping one to the Play
-Store. I'm also a big fan of trying out new apps — especially productivity ones, always looking
+Store. I'm also a big fan of trying out new apps, especially productivity ones, always looking
 for the one that finally gets my life organized.
 
 <br>
@@ -45,6 +45,3 @@ for the one that finally gets my life organized.
 
 ---
 
-<div align="center">
-<sub>built by hand, no templates</sub>
-</div>
