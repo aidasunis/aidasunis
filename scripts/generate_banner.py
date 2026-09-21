@@ -1,6 +1,9 @@
 """Generates the full two-panel terminal banner: VISUAL.MAP (dot-art) + SYSTEM.INFO."""
+import random
 import sys
-from PIL import Image
+from PIL import Image, ImageDraw, ImageFont
+
+random.seed(7)
 
 SRC = sys.argv[1]
 OUT = sys.argv[2]
@@ -52,15 +55,60 @@ for y in range(grid_h):
         cy = y * cell + cell / 2
         dots.append((cx, cy, r, op))
 offset_y = (BOX - grid_h * cell) / 2
+dots = [(cx, cy + offset_y, r, op) for cx, cy, r, op in dots]
 
 left_x = PAD
 right_x = PAD + LEFT_W + GAP
 box_y = COL_TOP + LABEL_H
 
-dot_svg = "\n    ".join(
-    f'<circle cx="{cx:.2f}" cy="{cy + offset_y:.2f}" r="{r:.2f}" fill="{ACCENT}" fill-opacity="{op:.2f}"/>'
-    for cx, cy, r, op in dots
-)
+# ---- glyph target ("</>") the dots morph into, via the same grid-sampling ----
+def glyph_dot_positions(text, box_px, grid_w=GRID_W):
+    canvas = 600
+    glyph_img = Image.new("L", (canvas, canvas), 0)
+    draw = ImageDraw.Draw(glyph_img)
+    font = ImageFont.truetype(r"C:\Windows\Fonts\consolab.ttf", 340)
+    bbox = draw.textbbox((0, 0), text, font=font)
+    tw, th = bbox[2] - bbox[0], bbox[3] - bbox[1]
+    draw.text(((canvas - tw) / 2 - bbox[0], (canvas - th) / 2 - bbox[1]), text, font=font, fill=255)
+    grid_h_local = grid_w
+    small_g = glyph_img.resize((grid_w, grid_h_local), Image.LANCZOS)
+    px = small_g.load()
+    c = box_px / grid_w
+    pts = []
+    for gy in range(grid_h_local):
+        for gx in range(grid_w):
+            if px[gx, gy] > 110:
+                pts.append((gx * c + c / 2, gy * c + c / 2))
+    return pts
+
+
+def pad_to(points, n):
+    if len(points) >= n:
+        return points[:n]
+    out = list(points)
+    i = 0
+    while len(out) < n:
+        bx, by = points[i % len(points)]
+        out.append((bx + random.uniform(-1.6, 1.6), by + random.uniform(-1.6, 1.6)))
+        i += 1
+    return out
+
+
+glyph_pts = glyph_dot_positions("</>", BOX)
+glyph_pts = pad_to(glyph_pts, len(dots))
+
+DUR = 8  # seconds per full loop
+KT = "0;0.4;0.5;0.9;1"
+
+dot_svg_parts = []
+for (cx, cy, r, op), (tx, ty) in zip(dots, glyph_pts):
+    dot_svg_parts.append(
+        f'<circle r="{r:.2f}" fill="{ACCENT}" fill-opacity="{op:.2f}">'
+        f'<animate attributeName="cx" values="{cx:.2f};{cx:.2f};{tx:.2f};{tx:.2f};{cx:.2f}" keyTimes="{KT}" dur="{DUR}s" repeatCount="indefinite"/>'
+        f'<animate attributeName="cy" values="{cy:.2f};{cy:.2f};{ty:.2f};{ty:.2f};{cy:.2f}" keyTimes="{KT}" dur="{DUR}s" repeatCount="indefinite"/>'
+        f'</circle>'
+    )
+dot_svg = "\n    ".join(dot_svg_parts)
 
 # corner brackets for the visual map box
 bl = 14  # bracket arm length
