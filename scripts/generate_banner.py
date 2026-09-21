@@ -82,12 +82,14 @@ rows = [
     ("Subject", "Aida"),
     ("Role", "Mechatronics Engineering Student"),
     ("Focus", "Software · Apps · Web"),
+    ("Off-duty", "Photography · Nature · Drawing"),
     ("Status", "Building + Learning + Shipping"),
     ("Core.Frontend", "React · Tailwind · JavaScript"),
     ("Core.Basics", "HTML · CSS"),
     ("ToolChain", "Git · GitHub · VS Code"),
     ("Explores", "Productivity apps"),
     ("Grid.GitHub", "aidasunis"),
+    ("Grid.Instagram", "aidapsunis"),
 ]
 row_h = BOX / (len(rows) - 1) if len(rows) > 1 else BOX
 row_h = min(row_h, 34)

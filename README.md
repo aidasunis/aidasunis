@@ -10,6 +10,10 @@
 
 <br>
 
+<a href="https://instagram.com/aidapsunis"><img src="https://img.shields.io/badge/Instagram-0d1117?style=for-the-badge&logo=instagram&logoColor=A78BFA" alt="Instagram"></a>
+
+<br><br>
+
 <img src="https://komarev.com/ghpvc/?username=aidasunis&style=flat&color=a78bfa&label=profile+views" alt="profile views">
 
 </div>
@@ -20,6 +24,10 @@
 
 I study Mechatronics Engineering, but I spend a good chunk of my free time building web pages
 and apps — something I picked up on my own and enjoy more than I probably should admit.
+
+Outside of code, I'm usually somewhere with a camera — open fields, the beach, anywhere near the
+sea. I'm a little obsessed with wildlife and marine life, and I like drawing just as much as I
+like shipping apps.
 
 Right now I'm working on a couple of apps, with the idea of eventually shipping one to the Play
 Store. I'm also a big fan of trying out new apps — especially productivity ones, always looking
